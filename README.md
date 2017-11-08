@@ -1,4 +1,4 @@
-## Curiosity-driven Exploration by Self-supervised Prediction / 好奇心驱动的探索自我监督预测##
+## Curiosity-driven Exploration by Self-supervised Prediction / 好奇心驱动的探索自我监督预测
 
 #### In ICML 2017 [[Project Website]](http://pathak22.github.io/noreward-rl/) [[Demo Video]](http://pathak22.github.io/noreward-rl/index.html#demoVideo)
 
@@ -17,7 +17,7 @@ Idea is to train agent with intrinsic curiosity-based motivation (ICM) when exte
 Surprisingly, you can use ICM even when there are no rewards available from the environment,   
 令人激动的是，即使在环境中没有回报的情况下，也可以使用ICM，  
 in which case, agent learns to explore only out of curiosity: 'RL without rewards'. If you find this work useful in your research, please cite:  
-在这种情况下，agent学习只是出于好奇：“没有奖励的RL”。如果你觉得这项工作对你的研究有用，请举例说明：
+在这种没有回报奖励的情况下，agent学习只是出于好奇：“没有奖励的RL”。如果你觉得这项工作对你的研究有用，请注明：
 
     @inproceedings{pathakICMl17curiosity,
         Author = {Pathak, Deepak and Agrawal, Pulkit and
@@ -78,7 +78,7 @@ To install, run these commands:
   python inference.py --default --env-id doom --record
   ```
 
-### 2) Other helpful pointers / 其他相关的帮助苏信息
+### 2) Other helpful pointers / 其他相关的帮助信息
 - [Paper](https://pathak22.github.io/noreward-rl/resources/icml17.pdf)
 - [Project Website](http://pathak22.github.io/noreward-rl/)
 - [Demo Video](http://pathak22.github.io/noreward-rl/index.html#demoVideo)
