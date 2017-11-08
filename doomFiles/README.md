@@ -1,5 +1,9 @@
 ### VizDoom Scenarios
-This directory provides the relevant files to replicate doom scenarios in ICML'17 paper. Run following commands:
+This directory provides the relevant files to replicate doom scenarios in ICML'17 paper.  
+这个目录用来复制和机器学习大会上相关的内容：  
+
+Run following commands:  
+运行一下命令：  
 
 ```Shell
 cp wads/*.wad ../curiosity/lib/python2.7/site-packages/doom_py/scenarios/

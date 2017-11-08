@@ -11,11 +11,14 @@ University of California, Berkeley<br/>
 <img src="images/mario1.gif" width="300">    <img src="images/vizdoom.gif" width="351">
 
 This is a tensorflow based implementation for our [ICML 2017 paper on curiosity-driven exploration for reinforcement learning](http://pathak22.github.io/noreward-rl/).   
-这是一个实现我们发表在2017机器学习大会上的《由好奇心驱动的自我监督预测》文章的tensorflow。  
+这是一个实现我们发表在2017机器学习大会上的《由好奇心驱动的自我监督预测》文章的tensorflow。 
+   
 Idea is to train agent with intrinsic curiosity-based motivation (ICM) when external rewards from environment are sparse.  
 思想是在外部环境奖励稀疏的情况下培养具有内在好奇心的动机。  
+  
 Surprisingly, you can use ICM even when there are no rewards available from the environment,   
 令人激动的是，即使在环境中没有回报的情况下，也可以使用ICM，  
+  
 in which case, agent learns to explore only out of curiosity: 'RL without rewards'. If you find this work useful in your research, please cite:  
 在这种没有回报奖励的情况下，agent学习只是出于好奇：“没有奖励的RL”。如果你觉得这项工作对你的研究有用，请注明：
 
@@ -30,6 +33,7 @@ in which case, agent learns to explore only out of curiosity: 'RL without reward
 ### 1) Installation and Usage / 安装和使用
 1.  This code is based on [TensorFlow](https://www.tensorflow.org/)。  
     这些代码是基于 [TensorFlow](https://www.tensorflow.org/)  
+      
 To install, run these commands:  
 用这些命令安装：  
   ```Shell
