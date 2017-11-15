@@ -23,6 +23,7 @@ def discount(x, gamma):
 def process_rollout(rollout, gamma, lambda_=1.0, clip=False):
     """
     Given a rollout, compute its returns and the advantage.
+    给定一个预定的行为，计算它的返回和奖励
     """
     # collecting transitions，采集进行的转换
     if rollout.unsup:
@@ -58,12 +59,14 @@ def process_rollout(rollout, gamma, lambda_=1.0, clip=False):
 
     return Batch(batch_si, batch_a, batch_adv, batch_r, rollout.terminal, features)
 
+# creat a tuple named Batch
 Batch = namedtuple("Batch", ["si", "a", "adv", "r", "terminal", "features"])
 
 class PartialRollout(object):
     """
     A piece of a complete rollout.  We run our agent, and process its experience
-    once it has processed enough steps.
+    once it has processed enough steps
+    一个完整的rollout，运行agent，它一旦经过了足够的step，就处理它获得经验。
     """
     def __init__(self, unsup=False):
         self.states = []
@@ -143,6 +146,7 @@ class RunnerThread(threading.Thread):
             # the timeout variable exists because apparently, if one worker dies, the other workers
             # won't die with it, unless the timeout is set to some large number.  This is an empirical
             # observation.
+            # 超时变量，保证worker不是同时死亡
 
             self.queue.put(next(rollout_provider), timeout=600.0)
 
@@ -153,6 +157,7 @@ def env_runner(env, policy, num_local_steps, summary_writer, render, predictor,
     The logic of the thread runner.  In brief, it constantly keeps on running
     the policy, and as long as the rollout exceeds a certain length, the thread
     runner appends the policy to the queue.
+    一直运行策略，直到rollout的长度超过规定数量，线程就将策略添加到队列中去。
     """
     last_state = env.reset()
     last_features = policy.get_initial_features()  # reset lstm memory
@@ -243,9 +248,11 @@ class A3C(object):
     def __init__(self, env, task, visualise, unsupType, envWrap=False, designHead='universe', noReward=False):
         """
         An implementation of the A3C algorithm that is reasonably well-tuned for the VNC environments.
+        为VNC换件调整后的A3C算法。
         Below, we will have a modest amount of complexity due to the way TensorFlow handles data parallelism.
         But overall, we'll define the model, specify its inputs, and describe how the policy gradients step
         should be computed.
+        将定义模型，制定其输入，描述如何计算策略梯度步骤
         """
         self.task = task
         self.unsup = unsupType is not None
