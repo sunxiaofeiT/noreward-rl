@@ -13,8 +13,9 @@ logger.setLevel(logging.INFO)
 def inference(args):
     """
     It restore policy weights, and does inference.
+    重置策略权重，进行推理
     """
-    # define environment
+    # define environment，定义环境
     env = create_env(args.env_id, client_id='0', remotes=None, envWrap=True,
                         acRepeat=1, record=args.record, outdir=args.outdir)
     numaction = env.action_space.n
@@ -50,22 +51,22 @@ def inference(args):
                     else:
                         print('I am a sampled policy!')
                 while True:
-                    # run policy
+                    # 执行策略
                     fetched = sess.run([probs, sample, vf, state_out_0, state_out_1] ,
                                 {"global/x:0": [last_state], "global/c_in:0": last_features[0], "global/h_in:0": last_features[1]})
                     prob_action, action, value_, features = fetched[0], fetched[1], fetched[2], fetched[3:]
 
-                    # run environment
+                    # 运行环境
                     if args.random:
-                        stepAct = np.random.randint(0, numaction)  # random policy
+                        stepAct = np.random.randint(0, numaction)  # 随机策略
                     else:
                         if args.greedy:
-                            stepAct = prob_action.argmax()  # greedy policy
+                            stepAct = prob_action.argmax()  # 贪心策略
                         else:
                             stepAct = action.argmax()
                     state, reward, terminal, info = env.step(stepAct)
 
-                    # update stats
+                    # 更新状态
                     length += 1
                     rewards += reward
                     last_state = state

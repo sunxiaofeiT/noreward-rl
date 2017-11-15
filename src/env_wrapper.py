@@ -18,7 +18,7 @@ import time, sys
 
 
 class BufferedObsEnv(gym.ObservationWrapper):
-    """Buffer observations and stack e.g. for frame skipping.
+    """Buffer observations and stack e.g. for frame skippingh，缓冲观测和堆栈，例如跳帧
 
     n is the length of the buffer, and number of observations stacked.
     skip is the number of steps between buffered observations (min=1).

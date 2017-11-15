@@ -24,14 +24,14 @@ def process_rollout(rollout, gamma, lambda_=1.0, clip=False):
     """
     Given a rollout, compute its returns and the advantage.
     """
-    # collecting transitions
+    # collecting transitions，采集进行的转换
     if rollout.unsup:
         batch_si = np.asarray(rollout.states + [rollout.end_state])
     else:
         batch_si = np.asarray(rollout.states)
     batch_a = np.asarray(rollout.actions)
 
-    # collecting target for value network
+    # collecting target for value networks收集价值网络的目标
     # V_t <-> r_t + gamma*r_{t+1} + ... + gamma^n*r_{t+n} + gamma^{n+1}*V_{n+1}
     rewards_plus_v = np.asarray(rollout.rewards + [rollout.r])  # bootstrapping
     if rollout.unsup:
@@ -47,12 +47,13 @@ def process_rollout(rollout, gamma, lambda_=1.0, clip=False):
     if clip:
         rewards = np.clip(rewards, -constants['REWARD_CLIP'], constants['REWARD_CLIP'])
     vpred_t = np.asarray(rollout.values + [rollout.r])
-    # "Generalized Advantage Estimation": https://arxiv.org/abs/1506.02438
+    # "Generalized Advantage Estimation"-广义优势估计: [基于广义优势估计的高维连续控制](https://arxiv.org/abs/1506.02438)
     # Eq (10): delta_t = Rt + gamma*V_{t+1} - V_t
     # Eq (16): batch_adv_t = delta_t + gamma*delta_{t+1} + gamma^2*delta_{t+2} + ...
     delta_t = rewards + gamma * vpred_t[1:] - vpred_t[:-1]
     batch_adv = discount(delta_t, gamma * lambda_)
-
+    
+    # 特征
     features = rollout.features[0]
 
     return Batch(batch_si, batch_a, batch_adv, batch_r, rollout.terminal, features)
